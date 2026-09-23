@@ -1,0 +1,23 @@
+from collections import defaultdict
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        res = []
+        listOfElems = [[]for i in range(len(nums)+1)]
+        freqCount = defaultdict(int)
+        for i in nums:
+            freqCount[i] += 1
+        for key,v in freqCount.items():
+            listOfElems[v].append(key)
+        k = k
+        for i in range(len(listOfElems)-1,-1,-1):
+            
+            for elem in listOfElems[i]:
+                if k <= 0:
+                    break
+                else:
+                    res.append(elem)
+                    k-=1
+            if k <= 0:
+                break
+
+        return res
